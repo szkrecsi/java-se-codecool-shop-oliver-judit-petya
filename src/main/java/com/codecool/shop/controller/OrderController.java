@@ -26,7 +26,7 @@ public class OrderController {
         String productQuantityStr = req.queryParams("quantity");
         int productQuantityInt = Integer.parseInt(productQuantityStr);
         int productIdInt = Integer.parseInt(productIdStr);
-        logger.info("LineItem created from product by ID {} and with quantity {}", productIdStr, productQuantityStr);
+        logger.info("Returned lineItem (product ID: {}) with quantity {}", productIdStr, productQuantityStr);
         return new LineItem(ProductDaoJDBC.getInstance().find(productIdInt), productQuantityInt);
     }
 

@@ -42,12 +42,12 @@ public class Order {
 
     public void updateOrderPrice(LineItem item) {
         this.orderPrice += item.totalPrice;
-        logger.info("Changed order's (id {}) {} price with {}", this.id, orderQuantity, item.totalPrice);
+        logger.info("Changed order's (id {}) price with {}", this.id, item.totalPrice);
     }
 
     public void updateOrderQuantity(LineItem item) {
         this.orderQuantity += item.quantity;
-        logger.info("Changed order's (id {}) {} quantity with {}", this.id, orderQuantity, item.quantity);
+        logger.info("Changed order's (id {}) quantity with {}", this.id, item.quantity);
     }
 
     public float getOrderPrice() {
