@@ -2,14 +2,16 @@ package com.codecool.shop.dao.jdbcImplementation;
 
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SupplierDaoJDBC extends JDBCAbstract implements SupplierDao {
 
+    private static final Logger logger = LoggerFactory.getLogger(SupplierDaoJDBC.class);
     private static SupplierDaoJDBC instance = null;
 
     private SupplierDaoJDBC() {

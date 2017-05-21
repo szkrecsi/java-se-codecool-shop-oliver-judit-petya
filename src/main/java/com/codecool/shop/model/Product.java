@@ -1,14 +1,16 @@
 package com.codecool.shop.model;
 
 import java.util.Currency;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Product extends BaseModel {
 
+    private static final Logger logger = LoggerFactory.getLogger(Product.class);
     private float defaultPrice;
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
-
 
     public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description);
@@ -23,6 +25,7 @@ public class Product extends BaseModel {
 
     public void setDefaultPrice(float defaultPrice) {
         this.defaultPrice = defaultPrice;
+        logger.debug("Product's price changed to {}", defaultPrice);
     }
 
     public Currency getDefaultCurrency() {
@@ -31,6 +34,7 @@ public class Product extends BaseModel {
 
     public void setDefaultCurrency(Currency defaultCurrency) {
         this.defaultCurrency = defaultCurrency;
+        logger.debug("Product's currency changed to {}", defaultCurrency);
     }
 
     public String getPrice() {
@@ -40,6 +44,7 @@ public class Product extends BaseModel {
     public void setPrice(float price, String currency) {
         this.defaultPrice = price;
         this.defaultCurrency = Currency.getInstance(currency);
+        logger.debug("Product's price and currency changed to {} and {}", defaultPrice, defaultCurrency);
     }
 
     public ProductCategory getProductCategory() {
@@ -49,6 +54,7 @@ public class Product extends BaseModel {
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
         this.productCategory.addProduct(this);
+        logger.debug("Product's category changed to {}", productCategory.getName());
     }
 
     public Supplier getSupplier() {
@@ -58,6 +64,7 @@ public class Product extends BaseModel {
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
         this.supplier.addProduct(this);
+        logger.debug("Product's supplier changed to {}", supplier.getName());
     }
 
     @Override

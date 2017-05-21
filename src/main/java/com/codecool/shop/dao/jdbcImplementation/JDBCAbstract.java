@@ -1,14 +1,17 @@
 package com.codecool.shop.dao.jdbcImplementation;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 abstract class JDBCAbstract {
 
+    private static final Logger logger = LoggerFactory.getLogger(JDBCAbstract.class);
     private static ArrayList<String> dbProps = JDBCConnectPropParser.connectProps();
     String DATABASE;
     String DB_USER;
@@ -24,6 +27,7 @@ abstract class JDBCAbstract {
             dbConnection = getConnection();
         } catch (SQLException e) {
             e.getStackTrace();
+            logger.error("Connection failed");
         }
     }
 
@@ -53,6 +57,7 @@ abstract class JDBCAbstract {
             preparedStatement = dbConnection.prepareStatement(removeFromTable);
             preparedStatement.setInt(1, id);
             preparedStatement.executeQuery();
+            logger.debug("Deleted item (id: {}) from {} table", Integer.toString(id), table);
         } catch (Exception e) {
             e.getStackTrace();
         }

@@ -5,8 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JDBCConnectPropParser {
+
+    private static final Logger logger = LoggerFactory.getLogger(JDBCConnectPropParser.class);
 
     public static ArrayList<String> connectProps() {
         Properties prop = new Properties();
@@ -27,10 +31,12 @@ public class JDBCConnectPropParser {
             proplist.add(prop.getProperty("username"));
             proplist.add(prop.getProperty("password"));
 
+            logger.info("Successfully connected");
             return proplist;
 
         } catch (IOException ex) {
             ex.printStackTrace();
+            logger.error("Connection failed by reason of file error");
         } finally {
             if (input != null) {
                 try {

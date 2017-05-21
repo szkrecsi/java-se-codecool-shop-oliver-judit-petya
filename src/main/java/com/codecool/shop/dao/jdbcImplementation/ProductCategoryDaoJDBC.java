@@ -2,14 +2,16 @@ package com.codecool.shop.dao.jdbcImplementation;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCategoryDao {
 
+    private static final Logger logger = LoggerFactory.getLogger(ProductCategoryDaoJDBC.class);
     private static ProductCategoryDaoJDBC instance = null;
 
     private ProductCategoryDaoJDBC() {
@@ -39,6 +41,7 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
             if (result.next()) {
                 productCategory.setId(result.getInt("id"));
             }
+            logger.trace("Successfully added a ProductCategory to the table");
         } catch (SQLException e) {
             e.getStackTrace();
         }
@@ -62,6 +65,7 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
                 productCategory.setId(result.getInt("id"));
                 return productCategory;
             }
+            logger.info("Successfully found a productCategory (id: {})", Integer.toString(id));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -90,6 +94,7 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
                 productCategory.setId(result.getInt("id"));
                 productCategoryList.add(productCategory);
             }
+            logger.trace("Successfully returned all productCategories from the table");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -102,6 +107,7 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
         try {
             preparedStatement = dbConnection.prepareStatement(removeRecords);
             preparedStatement.execute();
+            logger.trace("Successfully removed all productCategories from the table");
         } catch (SQLException e) {
             e.printStackTrace();
         }

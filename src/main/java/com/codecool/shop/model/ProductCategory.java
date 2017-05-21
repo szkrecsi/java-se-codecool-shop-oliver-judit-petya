@@ -1,8 +1,12 @@
 package com.codecool.shop.model;
 
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProductCategory extends BaseModel {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductCategory.class);
     private String department;
     private ArrayList<Product> products;
 
@@ -18,6 +22,7 @@ public class ProductCategory extends BaseModel {
 
     public void setDepartment(String department) {
         this.department = department;
+        logger.debug("ProductCategory's department changed to {}", department);
     }
 
     public ArrayList getProducts() {
@@ -26,6 +31,7 @@ public class ProductCategory extends BaseModel {
 
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
+        logger.trace("ProductCategory's products changed");
     }
 
     public void addProduct(Product product) {

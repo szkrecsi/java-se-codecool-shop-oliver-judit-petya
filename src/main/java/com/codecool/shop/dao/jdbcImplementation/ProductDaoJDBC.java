@@ -4,15 +4,16 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
 
-
+    private static final Logger logger = LoggerFactory.getLogger(ProductDaoJDBC.class);
     private static ProductDaoJDBC instance = null;
 
     private SupplierDaoJDBC supplierDaoJdbc = SupplierDaoJDBC.getInstance();
@@ -48,6 +49,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
             if (result.next()) {
                 product.setId(result.getInt("id"));
             }
+            logger.trace("Successfully added a product to the table");
         } catch (SQLException e) {
             e.getStackTrace();
         }
@@ -74,6 +76,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
                 product.setId(result.getInt("id"));
                 return product;
             }
+            logger.info("Successfully found a product (id: {})", Integer.toString(id));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -89,6 +92,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
             String removeRecords = "TRUNCATE Product CASCADE;";
             preparedStatement = dbConnection.prepareStatement(removeRecords);
             preparedStatement.executeUpdate();
+            logger.trace("Successfully remove a product from the table");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -116,6 +120,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
                 product.setId(result.getInt("id"));
                 productList.add(product);
             }
+            logger.trace("Successfully returned all products from the table");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -145,6 +150,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
                 product.setId(result.getInt("id"));
                 productList.add(product);
             }
+            logger.info("Successfully returned all products by supplier (id: {}) from the table", Integer.toString(supplier.getId()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -174,6 +180,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
                 product.setId(result.getInt("id"));
                 productList.add(product);
             }
+            logger.info("Successfully returned all products by category (id: {}) from the table", Integer.toString(productCategory.getId()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
