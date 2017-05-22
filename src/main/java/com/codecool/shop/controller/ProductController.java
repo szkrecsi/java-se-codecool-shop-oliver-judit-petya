@@ -26,7 +26,7 @@ public class ProductController {
 
         Map indexRenderParams = paramFiller(req);
         indexRenderParams.put("products", productDataStore.getAll());
-        logger.info("All products loaded to index page");
+        logger.info("All products are loaded to index page");
         return new ModelAndView(indexRenderParams, "product/index");
     }
 

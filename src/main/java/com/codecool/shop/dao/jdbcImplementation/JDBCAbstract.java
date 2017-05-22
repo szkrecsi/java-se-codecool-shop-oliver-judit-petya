@@ -27,7 +27,7 @@ abstract class JDBCAbstract {
             dbConnection = getConnection();
         } catch (SQLException e) {
             e.getStackTrace();
-            logger.error("Connection failed");
+            logger.error("DB Connection failed");
         }
     }
 
@@ -57,7 +57,7 @@ abstract class JDBCAbstract {
             preparedStatement = dbConnection.prepareStatement(removeFromTable);
             preparedStatement.setInt(1, id);
             preparedStatement.executeQuery();
-            logger.debug("Deleted item (id: {}) from {} table", Integer.toString(id), table);
+            logger.debug("Deleted 'item' (id: {}) from {} table", Integer.toString(id), table);
         } catch (Exception e) {
             e.getStackTrace();
         }

@@ -31,7 +31,7 @@ public class JDBCConnectPropParser {
             proplist.add(prop.getProperty("username"));
             proplist.add(prop.getProperty("password"));
 
-            logger.info("Successfully connected");
+            logger.info("Successfully connected to database {}", prop.getProperty("database"));
             return proplist;
 
         } catch (IOException ex) {

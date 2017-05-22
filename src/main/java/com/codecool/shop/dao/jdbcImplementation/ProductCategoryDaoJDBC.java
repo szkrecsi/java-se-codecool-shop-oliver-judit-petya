@@ -41,7 +41,7 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
             if (result.next()) {
                 productCategory.setId(result.getInt("id"));
             }
-            logger.trace("Successfully added a ProductCategory to the table");
+            logger.trace("Successfully added {} ProductCategory to the table", productCategory.getName());
         } catch (SQLException e) {
             e.getStackTrace();
         }
@@ -65,7 +65,7 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
                 productCategory.setId(result.getInt("id"));
                 return productCategory;
             }
-            logger.info("Successfully found a productCategory (id: {})", Integer.toString(id));
+            logger.info("Successfully found a productCategory with id of {}", Integer.toString(id));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,7 +94,7 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
                 productCategory.setId(result.getInt("id"));
                 productCategoryList.add(productCategory);
             }
-            logger.trace("Successfully returned all productCategories from the table");
+            logger.trace("Successfully returned all productCategories");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -107,7 +107,7 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
         try {
             preparedStatement = dbConnection.prepareStatement(removeRecords);
             preparedStatement.execute();
-            logger.trace("Successfully removed all productCategories from the table");
+            logger.trace("Successfully removed all productCategories");
         } catch (SQLException e) {
             e.printStackTrace();
         }

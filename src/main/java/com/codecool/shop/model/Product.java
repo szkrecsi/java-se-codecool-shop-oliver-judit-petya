@@ -25,7 +25,7 @@ public class Product extends BaseModel {
 
     public void setDefaultPrice(float defaultPrice) {
         this.defaultPrice = defaultPrice;
-        logger.debug("Product's price changed to {}", defaultPrice);
+        logger.trace("Product's price changed to {}", defaultPrice);
     }
 
     public Currency getDefaultCurrency() {
@@ -34,7 +34,7 @@ public class Product extends BaseModel {
 
     public void setDefaultCurrency(Currency defaultCurrency) {
         this.defaultCurrency = defaultCurrency;
-        logger.debug("Product's currency changed to {}", defaultCurrency);
+        logger.trace("Product's currency changed to {}", defaultCurrency);
     }
 
     public String getPrice() {
@@ -44,7 +44,7 @@ public class Product extends BaseModel {
     public void setPrice(float price, String currency) {
         this.defaultPrice = price;
         this.defaultCurrency = Currency.getInstance(currency);
-        logger.debug("Product's price and currency changed to {} and {}", defaultPrice, defaultCurrency);
+        logger.debug("Product's price and currency changed to {} price and {} currency", price, Currency.getInstance(currency));
     }
 
     public ProductCategory getProductCategory() {
@@ -54,7 +54,7 @@ public class Product extends BaseModel {
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
         this.productCategory.addProduct(this);
-        logger.debug("Product's category changed to {}", productCategory.getName());
+        logger.trace("Product's category changed to {}", productCategory.getName());
     }
 
     public Supplier getSupplier() {
@@ -64,7 +64,7 @@ public class Product extends BaseModel {
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
         this.supplier.addProduct(this);
-        logger.debug("Product's supplier changed to {}", supplier.getName());
+        logger.trace("Product's supplier changed to {}", supplier.getName());
     }
 
     @Override

@@ -29,25 +29,26 @@ public class Order {
                 n.quantity += item.quantity;
                 n.totalPrice += item.totalPrice;
                 counter += 1;
-                logger.debug("lineItem's (id: {}) quantity increased by 1", item.getProduct().getId());
+                logger.debug("Item's (id: {}) quantity increased by 1", item.getProduct().getId());
             }
         }
         if (counter == 0) {
             items.add(item);
-            logger.info("New item added to cart");
+            logger.info("New item added to cart with id of {} and with price of {}", item.getQuantity(), item.getTotalPrice());
         }
         updateOrderPrice(item);
         updateOrderQuantity(item);
+        logger.debug("Now {} items are in cart with {} summarized price", this.getOrderQuantity(), this.getOrderPrice());
     }
 
     public void updateOrderPrice(LineItem item) {
         this.orderPrice += item.totalPrice;
-        logger.info("Changed order's (id {}) price with {}", this.id, item.totalPrice);
+        logger.debug("Changed order's (id: {}) price with {}", this.id, item.totalPrice);
     }
 
     public void updateOrderQuantity(LineItem item) {
         this.orderQuantity += item.quantity;
-        logger.info("Changed order's (id {}) quantity with {}", this.id, item.quantity);
+        logger.debug("Changed order's (id: {}) quantity with {}", this.id, item.quantity);
     }
 
     public float getOrderPrice() {

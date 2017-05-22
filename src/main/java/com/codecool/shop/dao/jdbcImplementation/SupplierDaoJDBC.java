@@ -40,6 +40,7 @@ public class SupplierDaoJDBC extends JDBCAbstract implements SupplierDao {
             if (result.next()) {
                 supplier.setId(result.getInt("id"));
             }
+            logger.info("Successfully added {} supplier to the table", supplier.getName());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -63,6 +64,7 @@ public class SupplierDaoJDBC extends JDBCAbstract implements SupplierDao {
                 supplier.setId(result.getInt("id"));
                 return supplier;
             }
+            logger.info("Successfully found a supplier with id of {}", Integer.toString(id));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -89,6 +91,7 @@ public class SupplierDaoJDBC extends JDBCAbstract implements SupplierDao {
                 supplier.setId(result.getInt("id"));
                 supplierList.add(supplier);
             }
+            logger.trace("Successfully returned all suppliers");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -100,6 +103,7 @@ public class SupplierDaoJDBC extends JDBCAbstract implements SupplierDao {
             String removeRecords = "TRUNCATE Supplier CASCADE;";
             preparedStatement = dbConnection.prepareStatement(removeRecords);
             preparedStatement.executeUpdate();
+            logger.trace("Successfully removed all suppliers");
         } catch (SQLException e) {
             e.printStackTrace();
         }

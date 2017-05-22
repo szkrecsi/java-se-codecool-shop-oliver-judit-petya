@@ -22,7 +22,7 @@ public class ProductCategory extends BaseModel {
 
     public void setDepartment(String department) {
         this.department = department;
-        logger.debug("ProductCategory's department changed to {}", department);
+        logger.trace("ProductCategory's department changed to {}", department);
     }
 
     public ArrayList getProducts() {

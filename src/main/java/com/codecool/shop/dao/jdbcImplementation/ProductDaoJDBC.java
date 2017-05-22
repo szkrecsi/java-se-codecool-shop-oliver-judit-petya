@@ -49,7 +49,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
             if (result.next()) {
                 product.setId(result.getInt("id"));
             }
-            logger.trace("Successfully added a product to the table");
+            logger.info("Successfully added {} product to the table", product.getName());
         } catch (SQLException e) {
             e.getStackTrace();
         }
@@ -76,7 +76,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
                 product.setId(result.getInt("id"));
                 return product;
             }
-            logger.info("Successfully found a product (id: {})", Integer.toString(id));
+            logger.info("Successfully found product with id of {}", Integer.toString(id));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,7 +92,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
             String removeRecords = "TRUNCATE Product CASCADE;";
             preparedStatement = dbConnection.prepareStatement(removeRecords);
             preparedStatement.executeUpdate();
-            logger.trace("Successfully remove a product from the table");
+            logger.trace("Successfully removed all products");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -120,7 +120,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
                 product.setId(result.getInt("id"));
                 productList.add(product);
             }
-            logger.trace("Successfully returned all products from the table");
+            logger.trace("Successfully returned all products");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -150,7 +150,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
                 product.setId(result.getInt("id"));
                 productList.add(product);
             }
-            logger.info("Successfully returned all products by supplier (id: {}) from the table", Integer.toString(supplier.getId()));
+            logger.info("Successfully returned all products by supplier with id of {}", Integer.toString(supplier.getId()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -180,7 +180,7 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
                 product.setId(result.getInt("id"));
                 productList.add(product);
             }
-            logger.info("Successfully returned all products by category (id: {}) from the table", Integer.toString(productCategory.getId()));
+            logger.info("Successfully returned all products by category with id of {}", Integer.toString(productCategory.getId()));
         } catch (SQLException e) {
             e.printStackTrace();
         }

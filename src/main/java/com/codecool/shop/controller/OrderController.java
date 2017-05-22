@@ -18,7 +18,7 @@ public class OrderController {
     private static void updateSession(Request req, Order currentOrder) {
         req.session().attribute("orderQuantity", currentOrder.getOrderQuantity());
         req.session().attribute("orderPrice", currentOrder.getOrderPrice());
-        logger.trace("Successfully updated the current session");
+        logger.info("Successfully updated the current session with quantity of {} and with orderprice of {}", currentOrder.getOrderQuantity(), currentOrder.getOrderPrice());
     }
 
     private static LineItem returnLineItemFromReq(Request req) {
@@ -26,7 +26,7 @@ public class OrderController {
         String productQuantityStr = req.queryParams("quantity");
         int productQuantityInt = Integer.parseInt(productQuantityStr);
         int productIdInt = Integer.parseInt(productIdStr);
-        logger.info("Returned lineItem (product ID: {}) with quantity {}", productIdStr, productQuantityStr);
+        logger.info("Returned lineItem (product id: {}) with quantity of {}", productIdStr, productQuantityStr);
         return new LineItem(ProductDaoJDBC.getInstance().find(productIdInt), productQuantityInt);
     }
 
@@ -35,7 +35,7 @@ public class OrderController {
         if (!req.session().attributes().contains("orderId")) {
             orderList.add(currentOrder);
             req.session().attribute("orderId", currentOrder.getId());
-            logger.info("currentOrder to orderList is added with id of {}",Integer.toString(req.session().attribute( "orderId")));
+            logger.info("New currentOrder is added to orderList with id of {}",Integer.toString(req.session().attribute( "orderId")));
         } else {
             int orderId = req.session().attribute("orderId");
             currentOrder = orderList.find(orderId);
@@ -52,7 +52,7 @@ public class OrderController {
         JSONObject jsonObj = new JSONObject();
         jsonObj.put("numOfLineItems", currentOrder.getOrderQuantity());
         res.type("application/json");
-        logger.debug("Item added to cart with id of {}", selectedItem.getProduct().getId());
+        logger.debug("Selected item: {} is added to cart with id of {}", selectedItem.getProduct().getName(), selectedItem.getProduct().getId());
         return jsonObj;
     }
 }
