@@ -2,12 +2,15 @@ package com.codecool.shop.dao.jdbcImplementation;
 
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h1>SupplierDaoJDBC Class</h1>
+ * It models Supplier Table.
+ */
 public class SupplierDaoJDBC extends JDBCAbstract implements SupplierDao {
 
     private static SupplierDaoJDBC instance = null;
@@ -15,6 +18,10 @@ public class SupplierDaoJDBC extends JDBCAbstract implements SupplierDao {
     private SupplierDaoJDBC() {
     }
 
+    /**
+     * It returns SupplierDaoJDBC instance (and creates if doesn't exists).
+     * @return SupplierDaoJDBC
+     */
     public static SupplierDaoJDBC getInstance() {
         if (instance == null) {
             instance = new SupplierDaoJDBC();
@@ -22,6 +29,10 @@ public class SupplierDaoJDBC extends JDBCAbstract implements SupplierDao {
         return instance;
     }
 
+    /**
+     * It adds Supplier with parameters (name, description) to the table.
+     * @param supplier
+     */
     public void add(Supplier supplier) {
         String insertIntoTable = "INSERT INTO Supplier (name, description) VALUES (?,?);";
         try {
@@ -44,6 +55,11 @@ public class SupplierDaoJDBC extends JDBCAbstract implements SupplierDao {
 
     }
 
+    /**
+     * It finds all Suppliers with a specific Id.
+     * @param id
+     * @return Supplier
+     */
     public Supplier find(int id) {
         String query = "SELECT * FROM Supplier WHERE id = ?;";
         try {
@@ -71,6 +87,10 @@ public class SupplierDaoJDBC extends JDBCAbstract implements SupplierDao {
         remove(id, "Supplier");
     }
 
+    /**
+     * It returns all Suppliers.
+     * @return List<Supplier>
+     */
     public List<Supplier> getAll() {
         String query = "SELECT * FROM supplier";
         List<Supplier> supplierList = new ArrayList<>();
@@ -93,6 +113,9 @@ public class SupplierDaoJDBC extends JDBCAbstract implements SupplierDao {
         return supplierList;
     }
 
+    /**
+     * It removes all Suppliers.
+     */
     public void removeAll() {
         try {
             String removeRecords = "TRUNCATE Supplier CASCADE;";

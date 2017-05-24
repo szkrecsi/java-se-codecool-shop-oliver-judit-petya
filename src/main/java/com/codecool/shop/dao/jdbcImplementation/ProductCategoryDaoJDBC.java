@@ -2,12 +2,15 @@ package com.codecool.shop.dao.jdbcImplementation;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h1>ProductCategoryDaoJDBC Class</h1>
+ * It models ProductCategory Table.
+ */
 public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCategoryDao {
 
     private static ProductCategoryDaoJDBC instance = null;
@@ -15,6 +18,10 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
     private ProductCategoryDaoJDBC() {
     }
 
+    /**
+     * It returns ProductCategoryDaoJDBC instance (and creates if doesn't exists).
+     * @return ProductCategoryDaoJDBC
+     */
     public static ProductCategoryDaoJDBC getInstance() {
         if (instance == null) {
             instance = new ProductCategoryDaoJDBC();
@@ -22,6 +29,10 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
         return instance;
     }
 
+    /**
+     * It adds productCategory with parameters (name, description, department) to the table.
+     * @param productCategory
+     */
     public void add(ProductCategory productCategory) {
         String insertIntoTable = "INSERT INTO productcategory (name, description, department) VALUES (?,?,?);";
 
@@ -44,6 +55,11 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
         }
     }
 
+    /**
+     * It finds all ProductCategories with a specific Id.
+     * @param id
+     * @return ProductCategory
+     */
     public ProductCategory find(int id) {
         String query = "SELECT * FROM ProductCategory WHERE id = ?;";
 
@@ -72,6 +88,10 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
         remove(id, "ProductCategory");
     }
 
+    /**
+     * It returns all ProductCategories.
+     * @return List<ProductCategory>
+     */
     public List<ProductCategory> getAll() {
         String query = "SELECT * FROM ProductCategory";
         List<ProductCategory> productCategoryList = new ArrayList<>();
@@ -96,6 +116,9 @@ public class ProductCategoryDaoJDBC extends JDBCAbstract implements ProductCateg
         return productCategoryList;
     }
 
+    /**
+     * It removes all ProductCategories.
+     */
     public void removeAll() {
         String removeRecords = "TRUNCATE productcategory CASCADE;";
 

@@ -4,14 +4,16 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h1>ProductDaoJDBC Class</h1>
+ * It models Product Table.
+ */
 public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
-
 
     private static ProductDaoJDBC instance = null;
 
@@ -21,6 +23,10 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
     private ProductDaoJDBC() {
     }
 
+    /**
+     * It returns ProductDaoJDBC instance (and creates if doesn't exists).
+     * @return ProductDaoJDBC
+     */
     public static ProductDaoJDBC getInstance() {
         if (instance == null) {
             instance = new ProductDaoJDBC();
@@ -28,6 +34,10 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
         return instance;
     }
 
+    /**
+     * It adds product with parameters (name, description, currency, default_price, supplier_id, product_category_id) to the table.
+     * @param product
+     */
     public void add(Product product) {
         String insertIntoTable = "INSERT INTO product (name, description, currency, default_price, supplier_id, product_category_id) VALUES (?,?,?,?,?,?);";
         try {
@@ -53,6 +63,11 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
         }
     }
 
+    /**
+     * It finds all Products with a specific Id.
+     * @param id
+     * @return Product
+     */
     public Product find(int id) {
         String query = "SELECT * FROM Product WHERE id = ?;";
         try {
@@ -84,6 +99,9 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
         remove(id, "Product");
     }
 
+    /**
+     * It removes all Products.
+     */
     public void removeAll() {
         try {
             String removeRecords = "TRUNCATE Product CASCADE;";
@@ -94,6 +112,10 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
         }
     }
 
+    /**
+     * It returns all Products.
+     * @return List<Product>
+     */
     public List<Product> getAll() {
         String query = "SELECT * FROM Product;";
         List<Product> productList = new ArrayList<>();
@@ -122,6 +144,11 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
         return productList;
     }
 
+    /**
+     * It finds all Products by Supplier.
+     * @param supplier
+     * @return List<Product>
+     */
     public List<Product> getBy(Supplier supplier) {
         String query = "SELECT * FROM Product WHERE supplier_id = ?;";
         List<Product> productList = new ArrayList<>();
@@ -151,6 +178,11 @@ public class ProductDaoJDBC extends JDBCAbstract implements ProductDao {
         return productList;
     }
 
+    /**
+     * It finds all Products by ProductCategory.
+     * @param productCategory
+     * @return List<Product>
+     */
     public List<Product> getBy(ProductCategory productCategory) {
         String query = "SELECT * FROM Product WHERE product_category_id = ?;";
         List<Product> productList = new ArrayList<>();

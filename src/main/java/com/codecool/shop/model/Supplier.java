@@ -2,6 +2,10 @@ package com.codecool.shop.model;
 
 import java.util.ArrayList;
 
+/**
+ *<h1>Supplier Class</h1>
+ * It represents the suppliers.
+ */
 public class Supplier extends BaseModel {
     private ArrayList<Product> products;
 
@@ -23,10 +27,18 @@ public class Supplier extends BaseModel {
         this.products = products;
     }
 
+    /**
+     * It adds a new product to current Supplier instance.
+     * @param product
+     */
     public void addProduct(Product product) {
         this.products.add(product);
     }
 
+    /**
+     * It overrides the default toString() method.
+     * @return String
+     */
     public String toString() {
         return String.format("id: %1$d, " +
                         "name: %2$s, " +
@@ -37,6 +49,11 @@ public class Supplier extends BaseModel {
         );
     }
 
+    /**
+     * It overrides the default equals() method.
+     * @param other
+     * @return boolean
+     */
     @Override
     public boolean equals(Object other) {
         if (other == null) return false;

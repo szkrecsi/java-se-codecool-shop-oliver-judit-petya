@@ -2,6 +2,10 @@ package com.codecool.shop.model;
 
 import java.util.Currency;
 
+/**
+ *<h1>Product Class</h1>
+ * It represents the products with defaultPrice, defaultCurrency, productCategory, supplier attributes.
+ */
 public class Product extends BaseModel {
 
     private float defaultPrice;
@@ -60,6 +64,10 @@ public class Product extends BaseModel {
         this.supplier.addProduct(this);
     }
 
+    /**
+     * It overrides the default toString() method.
+     * @return
+     */
     @Override
     public String toString() {
         return String.format("id: %1$d, " +
@@ -76,6 +84,11 @@ public class Product extends BaseModel {
                 this.supplier.getName());
     }
 
+    /**
+     * It overrides the default equals() method.
+     * @param other
+     * @return boolean
+     */
     @Override
     public boolean equals(Object other) {
         if (other == null) return false;

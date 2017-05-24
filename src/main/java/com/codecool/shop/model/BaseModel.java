@@ -1,8 +1,11 @@
 package com.codecool.shop.model;
 
-
 import java.lang.reflect.Field;
 
+/**
+ * <h1>BaseModel Class</h1>
+ * It summarizes the Models common behaviours and attributes.
+ */
 public class BaseModel {
 
     protected int id;
@@ -17,7 +20,6 @@ public class BaseModel {
         this.name = name;
         this.description = description;
     }
-
 
     public int getId() {
         return id;
@@ -43,6 +45,10 @@ public class BaseModel {
         this.description = description;
     }
 
+    /**
+     * It overrides the default toString() method.
+     * @return String
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
